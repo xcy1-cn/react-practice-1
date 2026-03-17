@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
+import { useTodoDispatch } from '../context/TodoContext'
 
 
-interface Props {
-    onAdd: (text: string) => void
-}
+// interface Props {
+//     onAdd: (text: string) => void
+// }
 
-const TodoInput = ({onAdd}: Props) => {
+const TodoInput = () => {
+  // useContext
+  const dispatch = useTodoDispatch()
+
   // 1. 收集input的数据
   const [text, setText] = useState('')
   const handleAdd = () => {
     const value = text.trim()
     if(!text.trim()) return
-    onAdd(value)
+    dispatch({type: 'add', payload: value})
     setText('') // 置空
   }
   // 2. 点击btn后将数据传给onAdd（）
