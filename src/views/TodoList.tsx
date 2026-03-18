@@ -1,7 +1,7 @@
 import TodoItem from "./TodoItem";
 import type { Todo } from "../types/todo";
 import { useContext, useMemo, useState } from "react";
-import { useTodoState } from "../context/TodoContext";
+import { useTodoFilter, useTodoState } from "../context/TodoContext";
 
 // interface Props {
 //   // todos: Todo[];
@@ -15,9 +15,11 @@ const TodoList = () => {
   const todos = useTodoState()
 
   // 需要一个什么状态
-  const [filter, setFilter] = useState<"all" | "completed" | "uncompleted">(
-    "all",
-  );
+  // const [filter, setFilter] = useState<"all" | "completed" | "uncompleted">(
+  //   "all",
+  // );
+
+  const {filter, setFilter} = useTodoFilter()
   // 派生什么结果
   const filteredTodos = useMemo(() => {
     return todos.filter((e) => {
