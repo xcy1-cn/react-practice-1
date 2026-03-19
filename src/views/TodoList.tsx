@@ -2,6 +2,7 @@ import TodoItem from "./TodoItem";
 import type { Todo } from "../types/todo";
 import { useContext, useMemo, useState } from "react";
 import { useTodoFilter, useTodoState } from "../context/TodoContext";
+import { useTodoStore } from "../store/useTodoStore";
 
 // interface Props {
 //   // todos: Todo[];
@@ -12,14 +13,20 @@ import { useTodoFilter, useTodoState } from "../context/TodoContext";
 
 const TodoList = () => {
   // useContext
-  const todos = useTodoState()
+  // const todos = useTodoState()
 
   // 需要一个什么状态
   // const [filter, setFilter] = useState<"all" | "completed" | "uncompleted">(
   //   "all",
   // );
 
-  const {filter, setFilter} = useTodoFilter()
+  // Zustand
+  const todos = useTodoStore((s) => s.todos)
+  const filter = useTodoStore((s) => s.filter)
+  const setFilter = useTodoStore((s) => s.setFilter);
+
+  // context
+  // const {filter, setFilter} = useTodoFilter()
   // 派生什么结果
   const filteredTodos = useMemo(() => {
     return todos.filter((e) => {
